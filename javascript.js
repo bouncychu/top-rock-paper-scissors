@@ -87,13 +87,19 @@ function game() {
     
     //Keep playing single rounds until player or computer reaches a score of 5
     do {
-        roundNumber++;
+        roundNumber++
         let round = singleRound(playerSelection(), computerSelection());
         //Add score to player if player wins
         if (round.includes("win") === true) {
             playerScore++;
             alert('Round ' + roundNumber + ' results - ' + 'player score is: ' + playerScore + ', computer score is: ' + computerScore);
-            console.log('Round No.' + roundNumber + '- *PLAYER WON* ' + 'player score is: ' + playerScore + ', computer score is: ' + computerScore)
+            console.log('Round No.' + roundNumber + '- *PLAYER WON* ' + 'player score is: ' + playerScore + ', computer score is: ' + computerScore);
+            //Ends game if computer wins best of 5 rounds and prompts user to refresh to restart game
+            if (playerScore === 3) {
+                alert("Congratulations! You have won best of 5 rounds. Refresh page to play again.");
+                console.log("Player wins game. Computer loses.");
+                return 0;
+                }
         }
         //Add score to computer if computer wins
         else if (round.includes("lose") === true) {
@@ -112,10 +118,20 @@ function game() {
             alert('Round ' + roundNumber + ' results - ' + 'player score is: ' + playerScore + ', computer score is: ' + computerScore);
             console.log('Round No.' + roundNumber + '- *IT IS A TIE* ' + 'player score is: ' + playerScore + ', computer score is: ' + computerScore);
         }
-    } while (playerScore < 3);
-    //Ends game if player wins best of 5 and logs result
-    alert("Congratulations! You won the best of 5 rounds against the computer! Refresh the page to try again!");
-    console.log("Player wins game, computer loses.");
+    } while (roundNumber != 5);
+    //Ends game after 5 rounds taking into account ties and announces results
+    if (playerScore > computerScore) {
+        alert("Congratulations! You won the best of 5 rounds against the computer! Refresh the page to try again!");
+        console.log("Player wins game, computer loses.");
+    }
+    else if (playerScore < computerScore) {
+        alert("Sorry computer has won best of 5 rounds. You Lose! Refresh page to try again.")
+        console.log("Computer wins game. Player loses.");
+    }
+    else {
+        alert ("It's a tie! Please refresh the page to play again.");
+        console.log("It's a tie, nobody wins.")
+    }
 }
 
 game();
