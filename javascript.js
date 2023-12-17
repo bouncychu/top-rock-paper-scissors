@@ -41,7 +41,7 @@ function singleRound(playerSelection, computerSelection) {
             return ("tie");
         }
         else {
-            alert("It's a tie, you both chose rock!");
+            alert("It's a tie, you both chose scissors!");
             return ("tie");
         }
     }
